@@ -14,7 +14,9 @@ const generateToken = (userId) => {
     return token;
 };
 
-function isBcryptHash(password) {
+function isBcryptHash(pass) {
+  const password = pass
+  //console.log(password)
   return typeof password === 'string' && password.startsWith('$2') && password.length === 60;
 }
 
@@ -83,13 +85,20 @@ exports.signupUser = (req, res, next) => {
   try
   {
     console.log(req.body.password)
-    let password;
+    let password, address;
     if(Object.keys(req.body).includes('password'))
     {
       password = await bcrypt.hash(req.body.password, 10)
       updatedDatas = {...req.body, password:password}
       console.log(password)
     }
+
+    if(Object.keys(req.body).includes('address'))
+      {
+        address = JSON.parse(req.body.address)
+        updatedDatas = {...req.body, address:address}
+        //console.log(password)
+      }
 
     const images = imageFiles.map((file)=> {return `${file.filename}`})
     if(images.length>0)
