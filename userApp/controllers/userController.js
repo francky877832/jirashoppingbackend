@@ -3,7 +3,7 @@ const PointsHistory = require('../models/pointsHistoryModel');
 
 const Session = require('../models/sessionModel');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
